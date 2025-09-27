@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SRM Hostel Allotment</title>
+    <title>Hostel Allotment - Student Portal</title>
     <link rel="stylesheet" crossorigin href="./assets/styles.css">
     <style>
         /* Custom styles matching your design */
@@ -13,7 +13,7 @@
             padding: 20px 16px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
         }
-        
+
         .form-card {
             max-width: 400px;
             margin: 0 auto;
@@ -22,13 +22,13 @@
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
-        
+
         .header {
             text-align: center;
             padding: 32px 24px 24px;
             background: white;
         }
-        
+
         .logo {
             width: 48px;
             height: 48px;
@@ -42,42 +42,42 @@
             font-weight: bold;
             font-size: 18px;
         }
-        
+
         .title {
             font-size: 20px;
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 8px;
         }
-        
+
         .subtitle {
             font-size: 14px;
             color: #6b7280;
             line-height: 1.5;
         }
-        
+
         .step-content {
             padding: 0 24px 32px;
         }
-        
+
         .section-title {
             font-size: 18px;
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 8px;
         }
-        
+
         .section-subtitle {
             font-size: 14px;
             color: #6b7280;
             margin-bottom: 24px;
         }
-        
+
         /* Form inputs */
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .form-label {
             display: block;
             font-size: 14px;
@@ -85,7 +85,7 @@
             color: #374151;
             margin-bottom: 8px;
         }
-        
+
         .form-input {
             width: 100%;
             padding: 16px;
@@ -96,22 +96,22 @@
             transition: all 0.2s ease;
             box-sizing: border-box;
         }
-        
+
         .form-input:focus {
             outline: none;
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
-        
+
         .form-input::placeholder {
             color: #9ca3af;
         }
-        
+
         /* Option cards */
         .option-group {
             margin-bottom: 32px;
         }
-        
+
         .option-question {
             font-size: 16px;
             font-weight: 500;
@@ -119,13 +119,13 @@
             margin-bottom: 16px;
             text-align: center;
         }
-        
+
         .option-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-        
+
         .option-card {
             background: white;
             border: 2px solid #e5e7eb;
@@ -135,31 +135,31 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
+
         .option-card:hover {
             border-color: #d1d5db;
         }
-        
+
         .option-card.selected {
             border-color: #3b82f6;
             background: #eff6ff;
         }
-        
+
         .option-icon {
             font-size: 24px;
             margin-bottom: 8px;
         }
-        
+
         .option-label {
             font-size: 14px;
             font-weight: 500;
             color: #374151;
         }
-        
+
         .option-card.selected .option-label {
             color: #1d4ed8;
         }
-        
+
         /* Questionnaire sliders */
         .question-group {
             margin-bottom: 28px;
@@ -168,14 +168,14 @@
             border-radius: 12px;
             border-left: 4px solid #3b82f6;
         }
-        
+
         .question-label {
             font-size: 16px;
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 6px;
         }
-        
+
         .question-desc {
             font-size: 14px;
             color: #6b7280;
@@ -183,13 +183,13 @@
             margin-bottom: 16px;
             display: block;
         }
-        
+
         .slider-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .slider {
             flex: 1;
             height: 6px;
@@ -199,7 +199,7 @@
             -webkit-appearance: none;
             cursor: pointer;
         }
-        
+
         .slider::-webkit-slider-thumb {
             appearance: none;
             width: 20px;
@@ -209,7 +209,7 @@
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
         }
-        
+
         .slider::-moz-range-thumb {
             width: 20px;
             height: 20px;
@@ -219,7 +219,7 @@
             border: none;
             box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
         }
-        
+
         .slider-value {
             min-width: 40px;
             padding: 8px 15px;
@@ -230,19 +230,19 @@
             font-weight: 600;
             font-size: 16px;
         }
-        
+
         /* Progress indicators */
         .progress-container {
             padding: 0 24px 24px;
         }
-        
+
         .progress-steps {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 12px;
         }
-        
+
         .progress-step {
             width: 32px;
             height: 32px;
@@ -254,37 +254,37 @@
             font-weight: 600;
             transition: all 0.2s ease;
         }
-        
+
         .progress-step.active {
             background: #3b82f6;
             color: white;
         }
-        
+
         .progress-step.completed {
             background: #10b981;
             color: white;
         }
-        
+
         .progress-step.inactive {
             background: #e5e7eb;
             color: #9ca3af;
         }
-        
+
         .progress-line {
             width: 40px;
             height: 2px;
             background: #e5e7eb;
         }
-        
+
         .progress-line.completed {
             background: #10b981;
         }
-        
+
         /* Buttons */
         .button-container {
             padding: 0 24px 32px;
         }
-        
+
         .btn {
             width: 100%;
             padding: 16px;
@@ -295,38 +295,38 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
+
         .btn-primary {
             background: #3b82f6;
             color: white;
         }
-        
+
         .btn-primary:hover {
             background: #2563eb;
         }
-        
+
         .btn-primary:disabled {
             background: #9ca3af;
             cursor: not-allowed;
         }
-        
+
         .btn-back {
             background: transparent;
             color: #6b7280;
             border: 2px solid #e5e7eb;
             margin-bottom: 12px;
         }
-        
+
         .btn-back:hover {
             background: #f9fafb;
         }
-        
+
         /* Success page */
         .success-container {
             text-align: center;
             padding: 48px 24px;
         }
-        
+
         .success-icon {
             width: 80px;
             height: 80px;
@@ -339,58 +339,58 @@
             font-size: 32px;
             color: white;
         }
-        
+
         .success-title {
             font-size: 24px;
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 16px;
         }
-        
+
         .success-message {
             font-size: 14px;
             color: #6b7280;
             margin-bottom: 32px;
             line-height: 1.5;
         }
-        
+
         .success-details {
             background: #f9fafb;
             border-radius: 12px;
             padding: 20px;
             text-align: left;
         }
-        
+
         .success-detail {
             display: flex;
             justify-content: space-between;
             margin-bottom: 12px;
         }
-        
+
         .success-detail:last-child {
             margin-bottom: 0;
         }
-        
+
         .success-detail-label {
             font-size: 14px;
             color: #6b7280;
         }
-        
+
         .success-detail-value {
             font-size: 14px;
             font-weight: 500;
             color: #1f2937;
         }
-        
+
         /* Step visibility */
         .step {
             display: none;
         }
-        
+
         .step.active {
             display: block;
         }
-        
+
         /* Loading spinner */
         .loading-spinner {
             display: inline-block;
@@ -402,11 +402,11 @@
             animation: spin 1s ease-in-out infinite;
             margin-right: 8px;
         }
-        
+
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
+
         /* Textarea */
         .form-textarea {
             width: 100%;
@@ -420,13 +420,13 @@
             resize: vertical;
             min-height: 120px;
         }
-        
+
         .form-textarea:focus {
             outline: none;
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
-        
+
         .char-counter {
             text-align: right;
             font-size: 12px;
@@ -440,8 +440,11 @@
         <div class="form-card">
             <!-- Header -->
             <div class="header">
-                <div class="logo">SRM</div>
-                <div class="title">SRM Hostel Allotment</div>
+                <div class="logo">
+                    <img src="logo.png" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <span style="display: none;">LOGO</span>
+                </div>
+                <div class="title">Hostel Allotment</div>
                 <div class="subtitle">Complete your hostel application in three simple steps</div>
             </div>
 
@@ -451,32 +454,31 @@
                     <div class="section-title">Hostel Application</div>
 
                     <div class="form-group">
-                        <label class="form-label">🅰️ Full Name</label>
+                        <label class="form-label">Full Name</label>
                         <input type="text" class="form-input" id="name" placeholder="Enter your full name" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">🎫 Registration Number</label>
-                        <input type="text" class="form-input" id="student_id" placeholder="Enter your registration number" required>
+                        <label class="form-label">Registration Number</label>
+                        <input type="text" class="form-input" id="studentid" placeholder="Enter your registration number" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">📱 Mobile Number</label>
-                        <input type="tel" class="form-input" id="contact_info" placeholder="Enter your mobile number" required>
+                        <label class="form-label">Mobile Number</label>
+                        <input type="tel" class="form-input" id="contactinfo" placeholder="Enter your mobile number" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">📧 Email Address</label>
+                        <label class="form-label">Email Address</label>
                         <input type="email" class="form-input" id="email" placeholder="Enter your email address" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">👤 Gender</label>
+                        <label class="form-label">Gender</label>
                         <select class="form-input" id="gender" required>
                             <option value="">Select your gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
-                            <option value="Other">Other</option>
                         </select>
                     </div>
                 </div>
@@ -505,13 +507,13 @@
                     <!-- AC or Non-AC -->
                     <div class="option-group">
                         <div class="option-cards">
-                            <div class="option-card" data-question="prefers_ac" data-value="true">
+                            <div class="option-card" data-question="prefersac" data-value="true">
                                 <div class="option-icon">❄️</div>
                                 <div class="option-label">AC Room</div>
                                 <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Air Conditioned</div>
                             </div>
-                            <div class="option-card" data-question="prefers_ac" data-value="false">
-                                <div class="option-icon">🌀</div>
+                            <div class="option-card" data-question="prefersac" data-value="false">
+                                <div class="option-icon">🌬️</div>
                                 <div class="option-label">Non-AC Room</div>
                                 <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">Regular Ventilation</div>
                             </div>
@@ -520,29 +522,13 @@
 
                     <!-- Room Capacity -->
                     <div class="form-group">
-                        <label class="form-label">🏠 Room Capacity</label>
-                        <select class="form-input" id="room_capacity" required>
+                        <label class="form-label">Room Capacity</label>
+                        <select class="form-input" id="roomcapacity" required>
                             <option value="">Select room capacity</option>
-                            <option value="1">Single (1 person)</option>
                             <option value="2">Double (2 people)</option>
                             <option value="3">Triple (3 people)</option>
                             <option value="4">Quad (4 people)</option>
                         </select>
-                    </div>
-
-                    <!-- Smoking preference -->
-                    <div class="option-group">
-                        <div class="option-question">Are you okay with roommates who smoke?</div>
-                        <div class="option-cards">
-                            <div class="option-card" data-question="smoker_okay" data-value="true">
-                                <div class="option-icon">✅</div>
-                                <div class="option-label">Yes, I'm okay</div>
-                            </div>
-                            <div class="option-card" data-question="smoker_okay" data-value="false">
-                                <div class="option-icon">❌</div>
-                                <div class="option-label">No, I prefer non-smokers</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -574,9 +560,9 @@
                         <div class="question-desc">1 = Early bird, 5 = Night owl</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q1_sleep" name="q1_sleep" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q1sleep" name="q1sleep" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q1_sleep_value">3</div>
+                            <div class="slider-value" id="q1sleepvalue">3</div>
                         </div>
                     </div>
 
@@ -586,9 +572,9 @@
                         <div class="question-desc">1 = Very messy, 5 = Very neat</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q2_tidy" name="q2_tidy" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q2tidy" name="q2tidy" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q2_tidy_value">3</div>
+                            <div class="slider-value" id="q2tidyvalue">3</div>
                         </div>
                     </div>
 
@@ -598,9 +584,9 @@
                         <div class="question-desc">1 = Need quiet, 5 = Don't mind noise</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q3_noise" name="q3_noise" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q3noise" name="q3noise" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q3_noise_value">3</div>
+                            <div class="slider-value" id="q3noisevalue">3</div>
                         </div>
                     </div>
 
@@ -610,9 +596,9 @@
                         <div class="question-desc">1 = Never, 5 = Daily</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q4_friends_freq" name="q4_friends_freq" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q4friendsfreq" name="q4friendsfreq" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q4_friends_freq_value">3</div>
+                            <div class="slider-value" id="q4friendsfreqvalue">3</div>
                         </div>
                     </div>
 
@@ -622,9 +608,9 @@
                         <div class="question-desc">1 = Stay in, 5 = Go out</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q5_friday_pref" name="q5_friday_pref" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q5fridaypref" name="q5fridaypref" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q5_friday_pref_value">3</div>
+                            <div class="slider-value" id="q5fridayprefvalue">3</div>
                         </div>
                     </div>
 
@@ -634,9 +620,9 @@
                         <div class="question-desc">1 = Never, 5 = Often</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q6_overnight_guests" name="q6_overnight_guests" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q6overnightguests" name="q6overnightguests" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q6_overnight_guests_value">3</div>
+                            <div class="slider-value" id="q6overnightguestsvalue">3</div>
                         </div>
                     </div>
 
@@ -646,9 +632,9 @@
                         <div class="question-desc">1 = Avoid, 5 = Direct confrontation</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q7_conflict_style" name="q7_conflict_style" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q7conflictstyle" name="q7conflictstyle" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q7_conflict_style_value">3</div>
+                            <div class="slider-value" id="q7conflictstylevalue">3</div>
                         </div>
                     </div>
 
@@ -658,9 +644,9 @@
                         <div class="question-desc">1 = Very social, 5 = Need lots of alone time</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q8_alone_time" name="q8_alone_time" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q8alonetime" name="q8alonetime" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q8_alone_time_value">3</div>
+                            <div class="slider-value" id="q8alonetimevalue">3</div>
                         </div>
                     </div>
 
@@ -670,9 +656,9 @@
                         <div class="question-desc">1 = Not interested, 5 = Very interested</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q9_sports_games" name="q9_sports_games" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q9sportsgames" name="q9sportsgames" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q9_sports_games_value">3</div>
+                            <div class="slider-value" id="q9sportsgamesvalue">3</div>
                         </div>
                     </div>
 
@@ -682,18 +668,18 @@
                         <div class="question-desc">1 = Not interested, 5 = Very interested</div>
                         <div class="slider-container">
                             <span style="font-size: 12px; color: #6b7280;">1</span>
-                            <input type="range" id="q10_movies_music" name="q10_movies_music" min="1" max="5" value="3" class="slider">
+                            <input type="range" id="q10moviesmusic" name="q10moviesmusic" min="1" max="5" value="3" class="slider">
                             <span style="font-size: 12px; color: #6b7280;">5</span>
-                            <div class="slider-value" id="q10_movies_music_value">3</div>
+                            <div class="slider-value" id="q10moviesmusicvalue">3</div>
                         </div>
                     </div>
 
                     <!-- Self Description -->
                     <div class="form-group">
                         <label class="form-label">Tell us about yourself (Optional)</label>
-                        <textarea class="form-textarea" id="self_description" placeholder="Tell us anything else you'd like potential roommates to know about you..." maxlength="500"></textarea>
+                        <textarea class="form-textarea" id="selfdescription" placeholder="Tell us anything else you'd like potential roommates to know about you..." maxlength="500"></textarea>
                         <div class="char-counter">
-                            <span id="char_count">0</span>/500 characters
+                            <span id="charcount">0</span>/500 characters
                         </div>
                     </div>
                 </div>
@@ -720,10 +706,10 @@
                     <div class="success-icon">✅</div>
                     <div class="success-title">Application Submitted!</div>
                     <div class="success-message">
-                        Successfully Submitted<br>
+                        <strong>Successfully Submitted!</strong><br>
                         Thank you for submitting your hostel application. You will receive a confirmation email shortly.
                     </div>
-                    
+
                     <div class="success-details">
                         <div class="success-detail">
                             <span class="success-detail-label">Name:</span>
@@ -750,72 +736,70 @@
     <script>
         // Configuration
         const API_BASE_URL = 'http://localhost:8000/api';
-        
+
         // Application state
         const appState = {
             currentStep: 1,
             formData: {
                 // Step 1: Basic details
                 name: '',
-                student_id: '',
-                contact_info: '',
+                studentid: '',
+                contactinfo: '',
                 email: '',
                 gender: '',
                 
                 // Step 2: Hostel preferences
-                prefers_ac: null,
-                room_capacity: null,
-                smoker_okay: null,
+                prefersac: null,
+                roomcapacity: null,
                 
                 // Step 3: Compatibility questionnaire
-                q1_sleep: 3,
-                q2_tidy: 3,
-                q3_noise: 3,
-                q4_friends_freq: 3,
-                q5_friday_pref: 3,
-                q6_overnight_guests: 3,
-                q7_conflict_style: 3,
-                q8_alone_time: 3,
-                q9_sports_games: 3,
-                q10_movies_music: 3,
-                self_description: ''
+                q1sleep: 3,
+                q2tidy: 3,
+                q3noise: 3,
+                q4friendsfreq: 3,
+                q5fridaypref: 3,
+                q6overnightguests: 3,
+                q7conflictstyle: 3,
+                q8alonetime: 3,
+                q9sportsgames: 3,
+                q10moviesmusic: 3,
+                selfdescription: ''
             }
         };
-        
+
         // Slider questions
         const sliderQuestions = [
-            'q1_sleep', 'q2_tidy', 'q3_noise', 'q4_friends_freq', 'q5_friday_pref',
-            'q6_overnight_guests', 'q7_conflict_style', 'q8_alone_time', 'q9_sports_games', 'q10_movies_music'
+            'q1sleep', 'q2tidy', 'q3noise', 'q4friendsfreq', 'q5fridaypref',
+            'q6overnightguests', 'q7conflictstyle', 'q8alonetime', 'q9sportsgames', 'q10moviesmusic'
         ];
-        
+
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             initializeEventListeners();
             initializeSliders();
             updateUI();
         });
-        
+
         function initializeEventListeners() {
-            // Step 1 form inputs
-            ['name', 'student_id', 'contact_info', 'email', 'gender'].forEach(fieldId => {
+            // Step 1: form inputs
+            ['name', 'studentid', 'contactinfo', 'email', 'gender'].forEach(fieldId => {
                 const input = document.getElementById(fieldId);
                 if (input) {
                     input.addEventListener('input', handleStep1Input);
                     input.addEventListener('change', handleStep1Input);
                 }
             });
-            
-            // Step 2 option cards and room capacity
+
+            // Step 2: option cards and room capacity
             document.querySelectorAll('.option-card').forEach(card => {
                 card.addEventListener('click', handleOptionSelection);
             });
-            
-            document.getElementById('room_capacity').addEventListener('change', handleRoomCapacityChange);
-            
-            // Step 3 sliders and textarea
+            document.getElementById('roomcapacity').addEventListener('change', handleRoomCapacityChange);
+
+            // Step 3: sliders and textarea
             initializeSliders();
-            document.getElementById('self_description').addEventListener('input', handleTextareaInput);
-            
+            document.getElementById('selfdescription').addEventListener('input', handleTextareaInput);
+
             // Navigation buttons
             document.getElementById('continueToStep2').addEventListener('click', () => goToStep(2));
             document.getElementById('continueToStep3').addEventListener('click', () => goToStep(3));
@@ -823,11 +807,11 @@
             document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
             document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
         }
-        
+
         function initializeSliders() {
             sliderQuestions.forEach(questionId => {
                 const slider = document.getElementById(questionId);
-                const valueDisplay = document.getElementById(questionId + '_value');
+                const valueDisplay = document.getElementById(questionId + 'value');
                 
                 if (slider && valueDisplay) {
                     slider.addEventListener('input', function() {
@@ -837,25 +821,25 @@
                 }
             });
         }
-        
+
         function handleStep1Input(e) {
             const field = e.target.id;
             appState.formData[field] = e.target.value;
             updateUI();
         }
-        
+
         function handleOptionSelection(e) {
             const card = e.currentTarget;
             const question = card.dataset.question;
             const value = card.dataset.value;
-            
+
             // Remove selection from other cards in the same group
             const group = card.closest('.option-group');
             group.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-            
+
             // Select this card
             card.classList.add('selected');
-            
+
             // Update state
             if (value === 'true') {
                 appState.formData[question] = true;
@@ -864,108 +848,165 @@
             } else {
                 appState.formData[question] = parseInt(value);
             }
-            
+
             updateUI();
         }
-        
+
         function handleRoomCapacityChange(e) {
-            appState.formData.room_capacity = parseInt(e.target.value);
+            appState.formData.roomcapacity = parseInt(e.target.value);
             updateUI();
         }
-        
+
         function handleTextareaInput(e) {
             const value = e.target.value;
-            appState.formData.self_description = value;
-            document.getElementById('char_count').textContent = value.length;
+            appState.formData.selfdescription = value;
+            document.getElementById('charcount').textContent = value.length;
         }
-        
+
         function goToStep(stepNumber) {
             appState.currentStep = stepNumber;
-            
+
             // Hide all steps
-            document.querySelectorAll('.step').forEach(step => {
-                step.classList.remove('active');
-            });
-            
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+
             // Show current step
-            document.getElementById(`step${stepNumber}`).classList.add('active');
-            
+            document.getElementById('step' + stepNumber).classList.add('active');
+
             updateUI();
         }
-        
+
         function updateUI() {
             updateContinueButtons();
         }
-        
+
         function updateContinueButtons() {
             // Step 1: Check if all basic details are filled
-            const step1Complete = appState.formData.name.trim() !== '' &&
-                                  appState.formData.student_id.trim() !== '' &&
-                                  appState.formData.contact_info.trim() !== '' &&
-                                  appState.formData.email.trim() !== '' &&
-                                  appState.formData.gender.trim() !== '';
-            
+            const step1Complete = 
+                appState.formData.name.trim() !== '' &&
+                appState.formData.studentid.trim() !== '' &&
+                appState.formData.contactinfo.trim() !== '' &&
+                appState.formData.email.trim() !== '' &&
+                appState.formData.gender.trim() !== '';
+
             const continueBtn1 = document.getElementById('continueToStep2');
             if (continueBtn1) {
                 continueBtn1.disabled = !step1Complete;
             }
-            
+
             // Step 2: Check if hostel preferences are selected
-            const step2Complete = appState.formData.prefers_ac !== null &&
-                                  appState.formData.room_capacity !== null &&
-                                  appState.formData.smoker_okay !== null;
-            
+            const step2Complete = 
+                appState.formData.prefersac !== null &&
+                appState.formData.roomcapacity !== null;
+
             const continueBtn2 = document.getElementById('continueToStep3');
             if (continueBtn2) {
                 continueBtn2.disabled = !step2Complete;
             }
         }
-        
+
         async function handleSubmit() {
             const submitBtn = document.getElementById('submitApplication');
-            
+
             // Show loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
-            
+
             try {
+                // Log the form data being sent for debugging
+                console.log('Submitting form data:', appState.formData);
+
                 const response = await fetch(`${API_BASE_URL}/students`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(appState.formData)
+                    body: JSON.stringify({
+                        name: appState.formData.name,
+                        student_id: appState.formData.studentid,
+                        contact_info: appState.formData.contactinfo,
+                        email: appState.formData.email,
+                        prefers_ac: appState.formData.prefersac,
+                        room_capacity: appState.formData.roomcapacity,
+                        gender: appState.formData.gender,
+                        q1_sleep: appState.formData.q1sleep,
+                        q2_tidy: appState.formData.q2tidy,
+                        q3_noise: appState.formData.q3noise,
+                        q4_friends_freq: appState.formData.q4friendsfreq,
+                        q5_friday_pref: appState.formData.q5fridaypref,
+                        q6_overnight_guests: appState.formData.q6overnightguests,
+                        q7_conflict_style: appState.formData.q7conflictstyle,
+                        q8_alone_time: appState.formData.q8alonetime,
+                        q9_sports_games: appState.formData.q9sportsgames,
+                        q10_movies_music: appState.formData.q10moviesmusic,
+                        self_description: appState.formData.selfdescription || null
+                    })
                 });
-                
+
+                console.log('Response status:', response.status);
+
                 if (response.ok) {
                     const result = await response.json();
+                    console.log('Success response:', result);
                     showSuccessPage();
                 } else {
-                    const error = await response.json();
-                    throw new Error(error.detail || 'Failed to submit application');
+                    // Better error handling
+                    let errorMessage = 'Failed to submit application';
+                    
+                    try {
+                        const errorData = await response.json();
+                        console.log('Error response:', errorData);
+                        
+                        if (errorData.detail) {
+                            if (typeof errorData.detail === 'string') {
+                                errorMessage = errorData.detail;
+                            } else if (Array.isArray(errorData.detail)) {
+                                // Handle validation errors array
+                                const errors = errorData.detail.map(err => {
+                                    if (err.msg) return `${err.loc ? err.loc.join('.') + ': ' : ''}${err.msg}`;
+                                    return err.toString();
+                                });
+                                errorMessage = errors.join(', ');
+                            } else {
+                                errorMessage = JSON.stringify(errorData.detail);
+                            }
+                        }
+                    } catch (parseError) {
+                        console.error('Failed to parse error response:', parseError);
+                        const errorText = await response.text();
+                        console.log('Raw error response:', errorText);
+                        errorMessage = `HTTP ${response.status}: ${errorText || 'Unknown error'}`;
+                    }
+                    
+                    throw new Error(errorMessage);
                 }
-                
             } catch (error) {
                 console.error('Submit error:', error);
-                alert('Error submitting application: ' + error.message);
+                
+                // Better error display
+                let displayMessage = 'Failed to submit application. Please check your connection and try again.';
+                if (error.message && error.message !== '[object Object]') {
+                    displayMessage = error.message;
+                }
+                
+                alert('Error: ' + displayMessage);
                 
                 // Reset button
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Application';
             }
         }
-        
+
         function showSuccessPage() {
             // Update success page details
             document.getElementById('success-name').textContent = appState.formData.name;
-            document.getElementById('success-registration').textContent = appState.formData.student_id;
-            document.getElementById('success-room-type').textContent = appState.formData.prefers_ac ? 'AC Room' : 'Non-AC Room';
-            document.getElementById('success-capacity').textContent = appState.formData.room_capacity + '-share';
-            
+            document.getElementById('success-registration').textContent = appState.formData.studentid;
+            document.getElementById('success-room-type').textContent = 
+                appState.formData.prefersac ? 'AC Room' : 'Non-AC Room';
+            document.getElementById('success-capacity').textContent = 
+                appState.formData.roomcapacity + '-share';
+
             // Hide all steps and show success
-            document.querySelectorAll('.step').forEach(step => {
-                step.classList.remove('active');
-            });
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
             document.getElementById('success').classList.add('active');
         }
     </script>

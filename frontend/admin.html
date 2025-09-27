@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SRM Hostel Admin Dashboard</title>
-    <link rel="stylesheet" crossorigin href="./assets/styles.css">
+    <title>Hostel Allotment - Admin Dashboard</title>
+    <link rel="stylesheet" crossorigin href="./assets/index-Xo0agKvU.css">
     <style>
         .main-container {
             min-height: 100vh;
@@ -21,15 +21,19 @@
         .logo {
             width: 64px;
             height: 64px;
-            background: #1f2937;
-            border-radius: 16px;
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 24px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .dashboard-title {
@@ -155,6 +159,73 @@
             background: #6b7280;
         }
         
+        /* Filter Controls */
+        .filter-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .filter-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+        
+        .filter-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .filter-group-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .checkbox-item:hover {
+            background: #f8fafc;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            font-size: 14px;
+            color: #374151;
+            cursor: pointer;
+            user-select: none;
+        }
+        
         .students-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -181,7 +252,6 @@
             font-size: 18px;
             font-weight: 600;
             color: #1f2937;
-            margin: 0;
         }
         
         .student-id {
@@ -191,10 +261,6 @@
             border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
-        }
-        
-        .student-details {
-            margin-bottom: 20px;
         }
         
         .detail-row {
@@ -217,6 +283,7 @@
         .student-actions {
             display: flex;
             gap: 8px;
+            margin-top: 16px;
         }
         
         .student-actions button {
@@ -237,6 +304,181 @@
         .delete-btn {
             background: #ef4444;
             color: white;
+        }
+        
+        /* GROUP MATCHES STYLES */
+        .matches-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .match-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #3b82f6;
+            transition: all 0.2s ease;
+        }
+        
+        .match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        .match-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .match-rank {
+            background: #1f2937;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .match-students {
+            flex: 1;
+        }
+        
+        .match-students h3 {
+            font-size: 18px;
+            color: #1f2937;
+            margin: 0 0 4px 0;
+        }
+        
+        .match-students p {
+            color: #6b7280;
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .group-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .member-tag {
+            background: #f0f9ff;
+            border: 1px solid #e0f2fe;
+            color: #0c4a6e;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .match-details {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+        
+        .match-detail {
+            background: #f8fafc;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        
+        .compatibility-score {
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .score-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 8px;
+        }
+        
+        .score-label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .compatibility-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .breakdown-label {
+            min-width: 70px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .breakdown-value {
+            min-width: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            text-align: right;
+        }
+        
+        .match-explanation {
+            background: #f0f9ff;
+            border: 1px solid #e0f2fe;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        
+        .match-explanation p {
+            color: #0f172a;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
         }
         
         .empty-state {
@@ -278,61 +520,51 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* Connection status indicator */
-        .connection-status {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            z-index: 1000;
+        .filter-applied {
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
         }
         
-        .connection-status.connected {
+        .no-matches-message {
+            text-align: center;
+            padding: 40px;
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .no-matches-message h3 {
+            color: #92400e;
+            margin: 0 0 8px 0;
+        }
+        
+        .no-matches-message p {
+            color: #a16207;
+            margin: 0;
+        }
+        
+        .group-size-badge {
             background: #10b981;
             color: white;
-        }
-        
-        .connection-status.disconnected {
-            background: #ef4444;
-            color: white;
-        }
-        
-        .debug-info {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #1f2937;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 2px 8px;
+            border-radius: 10px;
             font-size: 11px;
-            max-width: 300px;
-            z-index: 1000;
+            font-weight: bold;
+            margin-left: 8px;
         }
     </style>
 </head>
 <body>
-    <!-- Connection Status -->
-    <div id="connectionStatus" class="connection-status disconnected">
-        🔴 Checking Connection...
-    </div>
-    
-    <!-- Debug Info -->
-    <div id="debugInfo" class="debug-info">
-        <div>Backend: <span id="backendStatus">Checking...</span></div>
-        <div>API URL: <span id="apiUrl">http://localhost:8000/api</span></div>
-        <div>Last Error: <span id="lastError">None</span></div>
-    </div>
-
     <div class="main-container">
-        <!-- Header -->
+        <!-- Header with Logo -->
         <div class="dashboard-header">
-            <div class="logo">SRM</div>
+            <div class="logo">
+                <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div style="display:none; width:64px; height:64px; background:#1f2937; border-radius:16px; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:18px;">LOGO</div>
+            </div>
             <h1 class="dashboard-title">Admin Dashboard</h1>
-            <p class="dashboard-subtitle">Manage hostel applications and roommate matches</p>
+            <p class="dashboard-subtitle">Manage hostel applications and roommate group matches</p>
         </div>
 
         <!-- Stats -->
@@ -359,7 +591,7 @@
         <div class="tabs-container">
             <div class="tabs">
                 <button class="tab active" id="studentsTab">Students</button>
-                <button class="tab" id="matchesTab">Matches</button>
+                <button class="tab" id="matchesTab">Group Matches</button>
             </div>
         </div>
 
@@ -380,124 +612,104 @@
             <!-- Matches Tab -->
             <div class="tab-content" id="matchesContent">
                 <div class="section-header">
-                    <h2 class="section-title">Roommate Matches</h2>
-                    <button class="action-btn" id="generateMatches">✨ Generate Matches</button>
+                    <h2 class="section-title">Room Group Matches</h2>
+                    <button class="action-btn" id="generateMatches">✨ Generate Group Matches</button>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="filter-container">
+                    <div class="filter-title">🔍 Filter Group Matches</div>
+                    <div class="filter-groups">
+                        <div class="filter-group">
+                            <div class="filter-group-title">Room Capacity</div>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="filter2sharing" checked>
+                                    <label for="filter2sharing">2-Sharing Groups</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="filter3sharing" checked>
+                                    <label for="filter3sharing">3-Sharing Groups</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="filter4sharing" checked>
+                                    <label for="filter4sharing">4-Sharing Groups</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <div class="filter-group-title">AC Preference</div>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="filterAC" checked>
+                                    <label for="filterAC">AC Rooms</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="filterNonAC" checked>
+                                    <label for="filterNonAC">Non-AC Rooms</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <div class="filter-group-title">Gender</div>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="filterMale" checked>
+                                    <label for="filterMale">Male</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="filterFemale" checked>
+                                    <label for="filterFemale">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <div class="filter-group-title">Actions</div>
+                            <div style="display: flex; gap: 8px; flex-direction: column;">
+                                <button class="action-btn secondary" id="clearFilters" style="padding: 8px 16px;">Clear All</button>
+                                <button class="action-btn secondary" id="selectAllFilters" style="padding: 8px 16px;">Select All</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="matchesContainer" class="matches-container">
-                    <!-- Matches will be loaded here -->
+                    <!-- Group matches will be loaded here -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Enhanced Configuration with debugging
-        const API_URLS = [
-            'http://localhost:8000/api',
-            'http://127.0.0.1:8000/api',
-            'http://localhost:8000/api',  // Try multiple times
-        ];
+        const API_BASE_URL = 'http://localhost:8000/api';
         
-        let API_BASE_URL = API_URLS;
         let currentStudents = [];
         let currentMatches = [];
+        let filteredMatches = [];
         let activeTab = 'students';
-        let connectionStatus = false;
         
-        // Debug functions
-        function updateDebugInfo(info) {
-            console.log('🐛 DEBUG:', info);
-            document.getElementById('lastError').textContent = info.error || 'None';
-            document.getElementById('backendStatus').textContent = info.status || 'Unknown';
-        }
-        
-        function updateConnectionStatus(connected) {
-            const statusEl = document.getElementById('connectionStatus');
-            connectionStatus = connected;
-            
-            if (connected) {
-                statusEl.className = 'connection-status connected';
-                statusEl.textContent = '🟢 Backend Connected';
-            } else {
-                statusEl.className = 'connection-status disconnected';
-                statusEl.textContent = '🔴 Backend Disconnected';
-            }
-        }
-        
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Admin Dashboard Starting...');
-            updateDebugInfo({ status: 'Starting...' });
             initializeEventListeners();
-            testConnections();
+            loadStudents();
         });
-        
-        async function testConnections() {
-            console.log('🔍 Testing backend connections...');
-            
-            for (let i = 0; i < API_URLS.length; i++) {
-                const url = API_URLS[i];
-                console.log(`Testing ${url}...`);
-                
-                try {
-                    const response = await fetch(`${url.replace('/api', '')}/health`, {
-                        method: 'GET',
-                        mode: 'cors',
-                        timeout: 5000
-                    });
-                    
-                    if (response.ok) {
-                        const data = await response.json();
-                        console.log(`✅ Connected to ${url}!`, data);
-                        API_BASE_URL = url;
-                        updateConnectionStatus(true);
-                        updateDebugInfo({ status: 'Connected', error: 'None' });
-                        loadStudents();
-                        return;
-                    }
-                } catch (error) {
-                    console.log(`❌ Failed to connect to ${url}:`, error.message);
-                    updateDebugInfo({ status: `Failed ${url}`, error: error.message });
-                }
-            }
-            
-            // All failed
-            console.error('❌ All connection attempts failed');
-            updateConnectionStatus(false);
-            updateDebugInfo({ status: 'All failed', error: 'Cannot connect to backend' });
-            displayConnectionError();
-        }
-        
-        function displayConnectionError() {
-            const container = document.getElementById('studentsGrid');
-            container.innerHTML = `
-                <div class="empty-state" style="grid-column: 1 / -1;">
-                    <div class="empty-icon">🔌</div>
-                    <h3 class="empty-title">Backend Connection Failed</h3>
-                    <p style="margin: 16px 0; color: #ef4444; font-weight: 600;">Cannot connect to API server</p>
-                    <div style="text-align: left; background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h4 style="margin: 0 0 12px 0; color: #1f2937;">🛠️ How to Fix:</h4>
-                        <ol style="margin: 0; padding-left: 20px; color: #374151;">
-                            <li><strong>Check Backend:</strong> Is uvicorn running on port 8000?</li>
-                            <li><strong>Open Terminal:</strong> cd smart-roomie/backend</li>
-                            <li><strong>Start Server:</strong> uvicorn app.main:app --reload</li>
-                            <li><strong>Check URL:</strong> Open http://localhost:8000 in browser</li>
-                            <li><strong>Refresh Page:</strong> Reload this admin dashboard</li>
-                        </ol>
-                    </div>
-                    <button onclick="testConnections()" style="padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-                        🔄 Retry Connection
-                    </button>
-                </div>
-            `;
-        }
         
         function initializeEventListeners() {
             document.getElementById('studentsTab').addEventListener('click', () => switchTab('students'));
             document.getElementById('matchesTab').addEventListener('click', () => switchTab('matches'));
             document.getElementById('refreshStudents').addEventListener('click', loadStudents);
             document.getElementById('generateMatches').addEventListener('click', generateMatches);
+            
+            // Filter event listeners
+            const filterCheckboxes = ['filter2sharing', 'filter3sharing', 'filter4sharing', 'filterAC', 'filterNonAC', 'filterMale', 'filterFemale'];
+            filterCheckboxes.forEach(id => {
+                document.getElementById(id).addEventListener('change', applyFilters);
+            });
+            
+            document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
+            document.getElementById('selectAllFilters').addEventListener('click', selectAllFilters);
         }
         
         function switchTab(tab) {
@@ -506,42 +718,131 @@
             document.getElementById(tab + 'Tab').classList.add('active');
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById(tab + 'Content').classList.add('active');
+            
+            if (tab === 'matches' && currentMatches.length === 0) {
+                displayEmptyMatches();
+            } else if (tab === 'matches' && currentMatches.length > 0) {
+                applyFilters();
+            }
         }
         
         async function loadStudents() {
-            if (!connectionStatus) {
-                displayConnectionError();
-                return;
-            }
-            
             console.log('📚 Loading students...');
-            showLoading();
+            showStudentsLoading();
             
             try {
-                const response = await fetch(`${API_BASE_URL}/students`, {
-                    method: 'GET',
-                    mode: 'cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                
+                const response = await fetch(`${API_BASE_URL}/students`);
                 if (response.ok) {
                     currentStudents = await response.json();
                     console.log(`✅ Loaded ${currentStudents.length} students`);
                     displayStudents(currentStudents);
                     updateStats();
-                    updateDebugInfo({ status: `Loaded ${currentStudents.length} students`, error: 'None' });
                 } else {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    throw new Error(`HTTP ${response.status}`);
                 }
             } catch (error) {
                 console.error('❌ Error loading students:', error);
-                updateDebugInfo({ status: 'Load failed', error: error.message });
-                displayError('Failed to load students: ' + error.message);
-            } finally {
-                hideLoading();
+                displayStudentsError('Failed to load students: ' + error.message);
             }
+        }
+        
+        async function generateMatches() {
+            if (currentStudents.length < 2) {
+                alert('You need at least 2 students to generate matches!');
+                return;
+            }
+            
+            const btn = document.getElementById('generateMatches');
+            btn.disabled = true;
+            btn.innerHTML = '<span style="display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s linear infinite; margin-right: 8px;"></span>Generating...';
+            
+            try {
+                console.log('🔄 Generating group matches...');
+                const response = await fetch(`${API_BASE_URL}/matches`, {
+                    method: 'POST'
+                });
+                
+                if (response.ok) {
+                    currentMatches = await response.json();
+                    console.log(`✅ Generated ${currentMatches.length} group matches`);
+                    applyFilters(); // Apply current filters to new matches
+                    updateStats();
+                    
+                    // Switch to matches tab to show results
+                    switchTab('matches');
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+            } catch (error) {
+                console.error('❌ Error generating matches:', error);
+                alert('Error generating matches: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '✨ Generate Group Matches';
+            }
+        }
+        
+        function applyFilters() {
+            if (currentMatches.length === 0) {
+                displayEmptyMatches();
+                return;
+            }
+            
+            // Get filter states
+            const filters = {
+                roomCapacity: {
+                    2: document.getElementById('filter2sharing').checked,
+                    3: document.getElementById('filter3sharing').checked,
+                    4: document.getElementById('filter4sharing').checked
+                },
+                ac: {
+                    true: document.getElementById('filterAC').checked,
+                    false: document.getElementById('filterNonAC').checked
+                },
+                gender: {
+                    'Male': document.getElementById('filterMale').checked,
+                    'Female': document.getElementById('filterFemale').checked
+                }
+            };
+            
+            // Apply filters to group matches
+            filteredMatches = currentMatches.filter(match => {
+                // Get student data for this match (first student represents the group)
+                const student1 = currentStudents.find(s => s.student_id === match.student1_id);
+                
+                if (!student1) return false;
+                
+                // Check room capacity filter
+                if (!filters.roomCapacity[student1.room_capacity]) return false;
+                
+                // Check AC preference filter
+                if (!filters.ac[student1.prefers_ac]) return false;
+                
+                // Check gender filter
+                if (!filters.gender[student1.gender]) return false;
+                
+                return true;
+            });
+            
+            console.log(`🔍 Filtered ${filteredMatches.length}/${currentMatches.length} group matches`);
+            displayMatches(filteredMatches);
+        }
+        
+        function clearAllFilters() {
+            const filterCheckboxes = ['filter2sharing', 'filter3sharing', 'filter4sharing', 'filterAC', 'filterNonAC', 'filterMale', 'filterFemale'];
+            filterCheckboxes.forEach(id => {
+                document.getElementById(id).checked = false;
+            });
+            applyFilters();
+        }
+        
+        function selectAllFilters() {
+            const filterCheckboxes = ['filter2sharing', 'filter3sharing', 'filter4sharing', 'filterAC', 'filterNonAC', 'filterMale', 'filterFemale'];
+            filterCheckboxes.forEach(id => {
+                document.getElementById(id).checked = true;
+            });
+            applyFilters();
         }
         
         function displayStudents(students) {
@@ -553,9 +854,6 @@
                         <div class="empty-icon">👥</div>
                         <h3 class="empty-title">No Students Yet</h3>
                         <p>Student applications will appear here once submitted.</p>
-                        <button onclick="loadStudents()" style="margin-top: 16px; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                            🔄 Refresh
-                        </button>
                     </div>
                 `;
                 return;
@@ -568,35 +866,144 @@
                         <span class="student-id">${student.student_id}</span>
                     </div>
                     
-                    <div class="student-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Email:</span>
-                            <span class="detail-value">${student.email}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Contact:</span>
-                            <span class="detail-value">${student.contact_info}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Gender:</span>
-                            <span class="detail-value">${student.gender}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Room:</span>
-                            <span class="detail-value">${student.room_capacity}-share, ${student.prefers_ac ? 'AC' : 'Non-AC'}</span>
-                        </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Email:</span>
+                        <span class="detail-value">${student.email}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Gender:</span>
+                        <span class="detail-value">${student.gender}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Room:</span>
+                        <span class="detail-value">${student.room_capacity}-sharing, ${student.prefers_ac ? 'AC' : 'Non-AC'}</span>
                     </div>
                     
                     <div class="student-actions">
-                        <button class="view-btn" onclick="viewStudent('${student.student_id}')">
-                            👁️ View
-                        </button>
-                        <button class="delete-btn" onclick="deleteStudent('${student.student_id}')">
-                            🗑️ Delete
-                        </button>
+                        <button class="view-btn" onclick="viewStudent('${student.student_id}')">👁️ View</button>
+                        <button class="delete-btn" onclick="deleteStudent('${student.student_id}')">🗑️ Delete</button>
                     </div>
                 </div>
             `).join('');
+        }
+        
+        function displayMatches(matches) {
+            const container = document.getElementById('matchesContainer');
+            
+            if (matches.length === 0) {
+                if (currentMatches.length === 0) {
+                    displayEmptyMatches();
+                } else {
+                    container.innerHTML = `
+                        <div class="no-matches-message">
+                            <h3>🔍 No group matches found with current filters</h3>
+                            <p>Try adjusting your filter settings to see more group matches.</p>
+                        </div>
+                    `;
+                }
+                return;
+            }
+            
+            container.innerHTML = matches.map((match, index) => {
+                const student1 = currentStudents.find(s => s.student_id === match.student1_id);
+                const scoreColor = getScoreColor(match.compatibility_score);
+                const scoreLabel = getScoreLabel(match.compatibility_score);
+                
+                // Parse group members from match name
+                const groupMembers = match.student1_name.split(' + ');
+                const groupSize = groupMembers.length;
+                
+                return `
+                    <div class="match-card">
+                        <div class="match-header">
+                            <div class="match-rank">#${index + 1}</div>
+                            <div class="match-students">
+                                <h3>
+                                    ${groupSize}-Member Room Group
+                                    <span class="group-size-badge">${groupSize} people</span>
+                                </h3>
+                                <div class="group-members">
+                                    ${groupMembers.map(name => `<div class="member-tag">${name.trim()}</div>`).join('')}
+                                </div>
+                                ${student1 ? `
+                                    <div class="match-details">
+                                        <div class="match-detail">${student1.room_capacity}-sharing room</div>
+                                        <div class="match-detail">${student1.prefers_ac ? 'AC' : 'Non-AC'}</div>
+                                        <div class="match-detail">${student1.gender}</div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="compatibility-score">
+                                <div class="score-circle" style="background: ${scoreColor};">
+                                    ${Math.round(match.compatibility_score * 100)}%
+                                </div>
+                                <div class="score-label">${scoreLabel}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-breakdown">
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Habits</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${match.habits_similarity * 100}%;"></div>
+                                </div>
+                                <div class="breakdown-value">${Math.round(match.habits_similarity * 100)}%</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Social</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${match.social_similarity * 100}%;"></div>
+                                </div>
+                                <div class="breakdown-value">${Math.round(match.social_similarity * 100)}%</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Conflict</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${match.conflict_similarity * 100}%;"></div>
+                                </div>
+                                <div class="breakdown-value">${Math.round(match.conflict_similarity * 100)}%</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Interests</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${match.interests_similarity * 100}%;"></div>
+                                </div>
+                                <div class="breakdown-value">${Math.round(match.interests_similarity * 100)}%</div>
+                            </div>
+                        </div>
+                        
+                        ${match.match_explanation ? `
+                            <div class="match-explanation">
+                                <p><strong>Group Analysis:</strong> ${match.match_explanation}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function displayEmptyMatches() {
+            document.getElementById('matchesContainer').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🤝</div>
+                    <h3 class="empty-title">No Group Matches Generated</h3>
+                    <p>Click "Generate Group Matches" to create room groups for 2, 3, and 4 sharing arrangements with diverse compatibility scores.</p>
+                </div>
+            `;
+        }
+        
+        function getScoreColor(score) {
+            if (score >= 0.8) return '#10b981';
+            if (score >= 0.6) return '#f59e0b';
+            if (score >= 0.4) return '#f97316';
+            return '#ef4444';
+        }
+        
+        function getScoreLabel(score) {
+            if (score >= 0.8) return 'Excellent';
+            if (score >= 0.6) return 'Good';
+            if (score >= 0.4) return 'Fair';
+            return 'Poor';
         }
         
         async function deleteStudent(studentId) {
@@ -628,8 +1035,7 @@ ID: ${student.student_id}
 Email: ${student.email}
 Contact: ${student.contact_info}
 Gender: ${student.gender}
-Room: ${student.room_capacity}-share, ${student.prefers_ac ? 'AC' : 'Non-AC'}
-Smoking: ${student.smoker_okay ? 'Allowed' : 'Not allowed'}
+Room: ${student.room_capacity}-sharing, ${student.prefers_ac ? 'AC' : 'Non-AC'}
 
 Personality Scores (1-5):
 Sleep: ${student.q1_sleep} | Tidy: ${student.q2_tidy} | Noise: ${student.q3_noise}
@@ -639,31 +1045,6 @@ Description: ${student.self_description || 'None provided'}
             `);
         }
         
-        async function generateMatches() {
-            const btn = document.getElementById('generateMatches');
-            btn.disabled = true;
-            btn.textContent = '⏳ Generating...';
-            
-            try {
-                const response = await fetch(`${API_BASE_URL}/matches`, {
-                    method: 'POST'
-                });
-                
-                if (response.ok) {
-                    currentMatches = await response.json();
-                    alert(`Generated ${currentMatches.length} matches!`);
-                    updateStats();
-                } else {
-                    throw new Error('Failed to generate matches');
-                }
-            } catch (error) {
-                alert('Error: ' + error.message);
-            } finally {
-                btn.disabled = false;
-                btn.textContent = '✨ Generate Matches';
-            }
-        }
-        
         function updateStats() {
             document.getElementById('totalStudents').textContent = currentStudents.length;
             document.getElementById('maleStudents').textContent = currentStudents.filter(s => s.gender === 'Male').length;
@@ -671,9 +1052,8 @@ Description: ${student.self_description || 'None provided'}
             document.getElementById('totalMatches').textContent = currentMatches.length;
         }
         
-        function showLoading() {
-            const container = document.getElementById('studentsGrid');
-            container.innerHTML = `
+        function showStudentsLoading() {
+            document.getElementById('studentsGrid').innerHTML = `
                 <div class="loading" style="grid-column: 1 / -1;">
                     <div class="loading-spinner"></div>
                     <p>Loading students...</p>
@@ -681,20 +1061,12 @@ Description: ${student.self_description || 'None provided'}
             `;
         }
         
-        function hideLoading() {
-            // Loading will be replaced by displayStudents or displayError
-        }
-        
-        function displayError(message) {
-            const container = document.getElementById('studentsGrid');
-            container.innerHTML = `
+        function displayStudentsError(message) {
+            document.getElementById('studentsGrid').innerHTML = `
                 <div class="empty-state" style="grid-column: 1 / -1;">
                     <div class="empty-icon">⚠️</div>
                     <h3 class="empty-title">Error</h3>
                     <p style="color: #ef4444;">${message}</p>
-                    <button onclick="loadStudents()" style="margin-top: 16px; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                        🔄 Retry
-                    </button>
                 </div>
             `;
         }

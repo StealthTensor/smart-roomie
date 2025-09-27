@@ -1,4 +1,5 @@
 # backend/app/database.py
+
 import sqlite3
 import json
 from datetime import datetime
@@ -8,15 +9,15 @@ from .models import Student, StudentCreate
 class Database:
     def __init__(self, db_path: str = "smartroomie.db"):
         self.db_path = db_path
-        
+
     def get_connection(self):
         """Get database connection"""
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row  # Enable column access by name
         return conn
-    
+
     def init_db(self):
-        """Initialize the database with required tables"""
+        """Initialize the database with required tables - REMOVED SMOKING PREFERENCES"""
         conn = self.get_connection()
         try:
             conn.execute("""
@@ -29,7 +30,6 @@ class Database:
                     prefers_ac BOOLEAN NOT NULL,
                     room_capacity INTEGER NOT NULL,
                     gender TEXT NOT NULL,
-                    smoker_okay BOOLEAN NOT NULL,
                     q1_sleep INTEGER NOT NULL,
                     q2_tidy INTEGER NOT NULL,
                     q3_noise INTEGER NOT NULL,
@@ -45,135 +45,152 @@ class Database:
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
-            
-            # Create indexes for better performance
-            conn.execute("CREATE INDEX IF NOT EXISTS idx_student_id ON students(student_id)")
-            conn.execute("CREATE INDEX IF NOT EXISTS idx_gender ON students(gender)")
-            conn.execute("CREATE INDEX IF NOT EXISTS idx_prefers_ac ON students(prefers_ac)")
-            
             conn.commit()
+            print("✅ Database table created/verified (smoking preferences removed)")
         except Exception as e:
-            conn.rollback()
-            raise e
+            print(f"❌ Database initialization error: {e}")
+            raise
         finally:
             conn.close()
-    
-    def create_student(self, student: StudentCreate) -> str:
-        """Create a new student record"""
+
+    def create_student(self, student_data: StudentCreate) -> str:
+        """Create a new student profile - REMOVED SMOKING PREFERENCES"""
         conn = self.get_connection()
         try:
-            cursor = conn.execute("""
+            cursor = conn.cursor()
+            cursor.execute("""
                 INSERT INTO students (
-                    name, student_id, contact_info, email, prefers_ac, room_capacity,
-                    gender, smoker_okay, q1_sleep, q2_tidy, q3_noise, q4_friends_freq,
-                    q5_friday_pref, q6_overnight_guests, q7_conflict_style, q8_alone_time,
+                    name, student_id, contact_info, email, prefers_ac, room_capacity, gender,
+                    q1_sleep, q2_tidy, q3_noise, q4_friends_freq, q5_friday_pref,
+                    q6_overnight_guests, q7_conflict_style, q8_alone_time, 
                     q9_sports_games, q10_movies_music, self_description
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
-                student.name, student.student_id, student.contact_info, student.email,
-                student.prefers_ac, student.room_capacity, student.gender, student.smoker_okay,
-                student.q1_sleep, student.q2_tidy, student.q3_noise, student.q4_friends_freq,
-                student.q5_friday_pref, student.q6_overnight_guests, student.q7_conflict_style,
-                student.q8_alone_time, student.q9_sports_games, student.q10_movies_music,
-                student.self_description
+                student_data.name,
+                student_data.student_id,
+                student_data.contact_info,
+                student_data.email,
+                student_data.prefers_ac,
+                student_data.room_capacity,
+                student_data.gender,
+                student_data.q1_sleep,
+                student_data.q2_tidy,
+                student_data.q3_noise,
+                student_data.q4_friends_freq,
+                student_data.q5_friday_pref,
+                student_data.q6_overnight_guests,
+                student_data.q7_conflict_style,
+                student_data.q8_alone_time,
+                student_data.q9_sports_games,
+                student_data.q10_movies_music,
+                student_data.self_description
             ))
             conn.commit()
-            return student.student_id
-        except sqlite3.IntegrityError:
-            raise ValueError(f"Student with ID {student.student_id} already exists")
+            return student_data.student_id
+        except sqlite3.IntegrityError as e:
+            if "UNIQUE constraint failed" in str(e):
+                raise ValueError(f"Student ID {student_data.student_id} already exists")
+            raise ValueError(f"Database constraint error: {e}")
         except Exception as e:
-            conn.rollback()
-            raise e
+            raise ValueError(f"Failed to create student: {e}")
         finally:
             conn.close()
-    
+
     def get_student(self, student_id: str) -> Optional[Student]:
-        """Get a student by ID"""
+        """Get a student by their ID"""
         conn = self.get_connection()
         try:
-            cursor = conn.execute("""
-                SELECT * FROM students WHERE student_id = ?
-            """, (student_id,))
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM students WHERE student_id = ?", (student_id,))
             row = cursor.fetchone()
             
             if row:
-                return Student(**dict(row))
+                return Student(
+                    id=row['id'],
+                    name=row['name'],
+                    student_id=row['student_id'],
+                    contact_info=row['contact_info'],
+                    email=row['email'],
+                    prefers_ac=bool(row['prefers_ac']),
+                    room_capacity=row['room_capacity'],
+                    gender=row['gender'],
+                    q1_sleep=row['q1_sleep'],
+                    q2_tidy=row['q2_tidy'],
+                    q3_noise=row['q3_noise'],
+                    q4_friends_freq=row['q4_friends_freq'],
+                    q5_friday_pref=row['q5_friday_pref'],
+                    q6_overnight_guests=row['q6_overnight_guests'],
+                    q7_conflict_style=row['q7_conflict_style'],
+                    q8_alone_time=row['q8_alone_time'],
+                    q9_sports_games=row['q9_sports_games'],
+                    q10_movies_music=row['q10_movies_music'],
+                    self_description=row['self_description'],
+                    created_at=datetime.fromisoformat(row['created_at']),
+                    updated_at=datetime.fromisoformat(row['updated_at'])
+                )
             return None
         finally:
             conn.close()
-    
+
     def get_all_students(self) -> List[Student]:
-        """Get all students"""
+        """Get all students from database"""
         conn = self.get_connection()
         try:
-            cursor = conn.execute("SELECT * FROM students ORDER BY created_at DESC")
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM students ORDER BY created_at DESC")
             rows = cursor.fetchall()
-            return [Student(**dict(row)) for row in rows]
+            
+            students = []
+            for row in rows:
+                student = Student(
+                    id=row['id'],
+                    name=row['name'],
+                    student_id=row['student_id'],
+                    contact_info=row['contact_info'],
+                    email=row['email'],
+                    prefers_ac=bool(row['prefers_ac']),
+                    room_capacity=row['room_capacity'],
+                    gender=row['gender'],
+                    q1_sleep=row['q1_sleep'],
+                    q2_tidy=row['q2_tidy'],
+                    q3_noise=row['q3_noise'],
+                    q4_friends_freq=row['q4_friends_freq'],
+                    q5_friday_pref=row['q5_friday_pref'],
+                    q6_overnight_guests=row['q6_overnight_guests'],
+                    q7_conflict_style=row['q7_conflict_style'],
+                    q8_alone_time=row['q8_alone_time'],
+                    q9_sports_games=row['q9_sports_games'],
+                    q10_movies_music=row['q10_movies_music'],
+                    self_description=row['self_description'],
+                    created_at=datetime.fromisoformat(row['created_at']),
+                    updated_at=datetime.fromisoformat(row['updated_at'])
+                )
+                students.append(student)
+            
+            return students
         finally:
             conn.close()
-    
-    def update_student(self, student_id: str, student_data: Dict) -> bool:
-        """Update a student record"""
-        conn = self.get_connection()
-        try:
-            # Build dynamic update query
-            set_clauses = []
-            values = []
-            
-            for key, value in student_data.items():
-                if key != 'student_id':  # Don't allow updating the primary identifier
-                    set_clauses.append(f"{key} = ?")
-                    values.append(value)
-            
-            if not set_clauses:
-                return False
-            
-            set_clauses.append("updated_at = ?")
-            values.append(datetime.now())
-            values.append(student_id)
-            
-            query = f"UPDATE students SET {', '.join(set_clauses)} WHERE student_id = ?"
-            cursor = conn.execute(query, values)
-            conn.commit()
-            
-            return cursor.rowcount > 0
-        except Exception as e:
-            conn.rollback()
-            raise e
-        finally:
-            conn.close()
-    
+
     def delete_student(self, student_id: str) -> bool:
-        """Delete a student record"""
+        """Delete a student from database"""
         conn = self.get_connection()
         try:
-            cursor = conn.execute("DELETE FROM students WHERE student_id = ?", (student_id,))
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM students WHERE student_id = ?", (student_id,))
             conn.commit()
             return cursor.rowcount > 0
-        except Exception as e:
-            conn.rollback()
-            raise e
         finally:
             conn.close()
-    
-    def get_students_by_filters(self, filters: Dict) -> List[Student]:
-        """Get students matching specific filters"""
+
+    def update_student_timestamp(self, student_id: str):
+        """Update the updated_at timestamp for a student"""
         conn = self.get_connection()
         try:
-            where_clauses = []
-            values = []
-            
-            for key, value in filters.items():
-                where_clauses.append(f"{key} = ?")
-                values.append(value)
-            
-            if where_clauses:
-                query = f"SELECT * FROM students WHERE {' AND '.join(where_clauses)}"
-            else:
-                query = "SELECT * FROM students"
-            
-            cursor = conn.execute(query, values)
-            rows = cursor.fetchall()
-            return [Student(**dict(row)) for row in rows]
+            cursor = conn.cursor()
+            cursor.execute(
+                "UPDATE students SET updated_at = CURRENT_TIMESTAMP WHERE student_id = ?",
+                (student_id,)
+            )
+            conn.commit()
         finally:
             conn.close()
